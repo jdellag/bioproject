@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import os
 import random
 import sys
@@ -30,10 +24,6 @@ from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dense, Flatten,
 from tensorflow.keras.models import Model
 from pathlib import Path
 
-
-# In[8]:
-
-
 # Set a random seed for reproducibility
 random.seed(42)
 
@@ -53,9 +43,6 @@ image_arrays = {folder_name.lower() + '_images': [] for folder_name in ['Local',
 
 # Initialize a StandardScaler object for normalizing the images before training
 scaler = StandardScaler()
-
-
-# In[9]:
 
 
 # Randomly select a specified number of samples from the metadata
@@ -105,8 +92,6 @@ for i in tqdm(indices):
                 image_arrays[folder_name.lower() + '_images'].append(img)
 
 
-# In[10]:
-
 
 # Check the number of images loaded in each folder
 folder_names = ['Local', 'Overview', 'Window']
@@ -122,8 +107,6 @@ for folder_name in folder_names:
     plt.title(f"{folder_name} image")
     plt.show()
 
-
-# In[11]:
 
 
 # Categorical columns of the data frame, ordered by the number of occurences of each class
@@ -151,8 +134,6 @@ overview_images = np.array(image_arrays['overview_images'])
 window_images = np.array(image_arrays['window_images'])
 
 
-# In[12]:
-
 
 # Extract the target values (y) from the metaData_sample DataFrame
 y = metaData_sample[top_classes].values
@@ -172,8 +153,6 @@ split_ratio = 0.8
     train_size=split_ratio, random_state=42
 )
 
-
-# In[13]:
 
 
 # Define the window branch of the CNN
@@ -223,31 +202,6 @@ def create_mlp_branch(input_shape, name):
     return input_layer, x
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[19]:
 
 
 # Create CNN branches for each image type
@@ -280,8 +234,6 @@ model.compile(optimizer = optimizer, loss = 'binary_crossentropy', metrics = ['c
 # Display the model summary
 model.summary()
 
-
-# In[20]:
 
 
 # Converges in ~3 epochs
