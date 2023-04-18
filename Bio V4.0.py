@@ -122,7 +122,7 @@ num_classes = 16
 top_classes = categorical_columns[:num_classes]
 
 # Extract the numerical data from the specified columns in the metaData_sample DataFrame
-mlp_input = metaData_sample[['X Scaled', 'Y Scaled', 'Attribute Number', 'R', 'G', 'B']].values
+mlp_input = metaData_sample[['R', 'G', 'B']].values
 
 # Convert the list of 'local_images' to a NumPy array
 local_images = np.array(image_arrays['local_images'])
@@ -210,7 +210,7 @@ overview_input, overview_branch = create_overview_branch(input_shape=(100, 100, 
 window_input, window_branch = create_window_branch(input_shape=(31, 31, 3))
 
 # Create MLP branch 
-categorical_input, categorical_branch = create_mlp_branch(input_shape=(6,), name='MLP')
+categorical_input, categorical_branch = create_mlp_branch(input_shape=(3,), name='MLP')
 
 # Concatenate the outputs of each branch
 concatenated = Concatenate()([local_branch, overview_branch, window_branch, categorical_branch])
